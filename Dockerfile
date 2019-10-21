@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi3-ubuntu:xenial
+FROM balenalib/raspberrypi3-ubuntu:bionic
 #FROM resin/rpi-raspbian
 #FROM debian:jessie-slim
 
