@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi3-debian-buster-run
+FROM balenalib/raspberrypi3
 #FROM resin/rpi-raspbian
 #FROM debian:jessie-slim
 
