@@ -1,6 +1,8 @@
 FROM balenalib/raspberrypi3
 #FROM ubuntu:xenial
 
+RUN [ "cross-build-start" ]
+
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
@@ -93,6 +95,8 @@ RUN set -x \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/lib/mongodb \
 	&& mv /etc/mongod.conf /etc/mongod.conf.orig
+
+RUN [ "cross-build-end" ]
 
 RUN mkdir -p /data/db /data/configdb \
 	&& chown -R mongodb:mongodb /data/db /data/configdb
