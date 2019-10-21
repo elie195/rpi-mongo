@@ -29,6 +29,8 @@ RUN set -ex; \
 	wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \
 	wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc"; \
 	export GNUPGHOME="$(mktemp -d)"; \
+        mkdir ~/.gnupg; \
+        echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf; \
 	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
 	gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \
 	rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc; \
@@ -50,6 +52,8 @@ ENV GPG_KEYS \
 # https://docs.mongodb.com/manual/tutorial/verify-mongodb-packages/#download-then-import-the-key-file
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
+        mkdir ~/.gnupg; \
+        echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf; \
 	for key in $GPG_KEYS; do \
 		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	done; \
