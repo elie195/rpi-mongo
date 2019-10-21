@@ -3,7 +3,7 @@ services:
 - docker
 language: bash
 script:
-# prepare qemu - wat
+# prepare qemu
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # build image
 - docker build -t elie195/rpi-mongo .
