@@ -88,11 +88,11 @@ RUN echo "deb http://$MONGO_REPO/apt/debian stretch/${MONGO_PACKAGE%-unstable}/$
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y \
-		${MONGO_PACKAGE}=$MONGO_VERSION \
-		${MONGO_PACKAGE}-server=$MONGO_VERSION \
-		${MONGO_PACKAGE}-shell=$MONGO_VERSION \
-		${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
-		${MONGO_PACKAGE}-tools=$MONGO_VERSION \
+		${MONGO_PACKAGE} \
+		${MONGO_PACKAGE}-server \
+		${MONGO_PACKAGE}-shell \
+		${MONGO_PACKAGE}-mongos \
+		${MONGO_PACKAGE}-tools \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/lib/mongodb \
 	&& mv /etc/mongod.conf /etc/mongod.conf.orig
