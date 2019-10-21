@@ -52,8 +52,6 @@ ENV GPG_KEYS \
 # https://docs.mongodb.com/manual/tutorial/verify-mongodb-packages/#download-then-import-the-key-file
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
-        mkdir ~/.gnupg; \
-        echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf; \
 	for key in $GPG_KEYS; do \
 		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	done; \
