@@ -58,7 +58,7 @@ RUN set -ex; \
 
 RUN mkdir /docker-entrypoint-initdb.d
 
-ENV GPG_KEYS 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+ENV GPG_KEYS 9DA31620334BD75D9DCB49F368818C72E52529D4
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	for key in $GPG_KEYS; do \
@@ -66,7 +66,7 @@ RUN set -ex; \
 	done; \
 	gpg --batch --export $GPG_KEYS > /etc/apt/trusted.gpg.d/mongodb.gpg; \
 	command -v gpgconf && gpgconf --kill all || :; \
-	rm -rf "$GNUPGHOME"; \
+	rm -r "$GNUPGHOME"; \
 	apt-key list
 
 # Allow build-time overrides (eg. to build image with MongoDB Enterprise version)
@@ -77,10 +77,10 @@ ARG MONGO_PACKAGE=mongodb-org
 ARG MONGO_REPO=repo.mongodb.org
 ENV MONGO_PACKAGE=${MONGO_PACKAGE} MONGO_REPO=${MONGO_REPO}
 
-ENV MONGO_MAJOR 3.6
-ENV MONGO_VERSION 3.6.14
+ENV MONGO_MAJOR 4.0
+ENV MONGO_VERSION 4.0.13
 # bashbrew-architectures:amd64 arm64v8
-RUN echo "deb http://$MONGO_REPO/apt/debian stretch/${MONGO_PACKAGE%-unstable}/$MONGO_MAJOR main" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%-unstable}.list"
+RUN echo "deb http://$MONGO_REPO/apt/debian buster/${MONGO_PACKAGE%-unstable}/$MONGO_MAJOR main" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%-unstable}.list"
 
 RUN set -x \
 	&& apt-get update \
