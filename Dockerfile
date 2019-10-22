@@ -1,9 +1,10 @@
 FROM balenalib/raspberrypi3-64-ubuntu:bionic
 
+RUN install_packages wget gnupg
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
-RUN install_packages gnupg
 RUN echo "deb http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
-RUN apt-get update && apt-get install mongodb-org
+RUN install_packages mongodb-org
+#RUN apt-get update && apt-get install mongodb-org
 
 RUN mkdir -p /data/db /data/configdb \
         && chown -R mongodb:mongodb /data/db /data/configdb
